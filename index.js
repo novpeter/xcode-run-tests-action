@@ -26,7 +26,6 @@ const core = require('@actions/core');
 const artifact = require('@actions/artifact');
 const execa = require('execa');
 
-const parseConstraints = require('./constraints');
 const { parseDestination, encodeDestinationOption } = require('./destinations');
 
 
@@ -97,17 +96,17 @@ const testProject = async ({
 
 const parseConfiguration = async () => {
     const configuration = {
-        workspace: getInput("workspace"),
-        project: getInput("project"),
-        scheme: getInput("scheme"),
-        configuration: getInput("configuration"),
-        sdk: getInput("sdk"),
-        arch: getInput("arch"),
-        destination: getInput("destination"),
-        codeSignIdentity: getInput('code-sign-identity'),
-        developmentTeam: getInput('development-team'),
-        resultBundlePath: getInput("result-bundle-path"),
-        resultBundleName: getInput("result-bundle-name"),
+        workspace: core.getInput("workspace"),
+        project: core.getInput("project"),
+        scheme: core.getInput("scheme"),
+        configuration: core.getInput("configuration"),
+        sdk: core.getInput("sdk"),
+        arch: core.getInput("arch"),
+        destination: core.getInput("destination"),
+        codeSignIdentity: core.getInput('code-sign-identity'),
+        developmentTeam: core.getInput('development-team'),
+        resultBundlePath: core.getInput("result-bundle-path"),
+        resultBundleName: core.getInput("result-bundle-name"),
     };
 
     if (configuration.destination !== "") {
@@ -139,7 +138,7 @@ const archiveResultBundle = async (resultBundlePath) => {
     try {
         await execa("ditto", args);
     } catch (error) {
-        _error(error);
+        core.error(error);
         return null;
     }
 
@@ -148,7 +147,7 @@ const archiveResultBundle = async (resultBundlePath) => {
 
 
 const uploadResultBundleArtifact = async (resultBundleArchivePath, resultBundleName) => {
-    const artifactClient = create()
+    const artifactClient = artifact.create()
     const uploadResult = await artifactClient.uploadArtifact(
         resultBundleName,
         [resultBundleArchivePath],
@@ -170,7 +169,7 @@ const main = async () => {
             await uploadResultBundleArtifact(resultBundleArchivePath, configuration.resultBundleName);
         }
     } catch (err) {
-        setFailed(`Testing failed with an unexpected error: ${err.message}`);
+        core.setFailed(`Testing failed with an unexpected error: ${err.message}`);
     }
 };
 
