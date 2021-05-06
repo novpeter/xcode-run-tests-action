@@ -19,14 +19,15 @@
 // SOFTWARE.
 
 
-import { dirname } from 'path';
-import { existsSync } from 'fs';
+const path = require('path');
+const fs = require('fs');
 
-import { getInput, error as _error, setFailed } from '@actions/core';
-import { create } from '@actions/artifact';
-import execa from 'execa';
+const core = require('@actions/core');
+const artifact = require('@actions/artifact');
+const execa = require('execa');
 
-import { parseDestination, encodeDestinationOption } from './destinations';
+const parseConstraints = require('./constraints');
+const { parseDestination, encodeDestinationOption } = require('./destinations');
 
 
 const getProjectInfo = async ({workspace, project}) => {
@@ -151,7 +152,7 @@ const uploadResultBundleArtifact = async (resultBundleArchivePath, resultBundleN
     const uploadResult = await artifactClient.uploadArtifact(
         resultBundleName,
         [resultBundleArchivePath],
-        dirname(resultBundleArchivePath)
+        path.dirname(resultBundleArchivePath)
     )
 };
 
