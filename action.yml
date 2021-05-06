@@ -1,0 +1,54 @@
+name: 'Xcode run tests'
+description: 'Test your Xcode project'
+
+branding:
+  icon: 'terminal'
+  color: 'blue'
+
+inputs:
+  workspace:
+    description: 'Workspace'
+    required: false
+  project:
+    description: 'Project'
+    required: false
+  scheme:
+    description: 'Scheme'
+    required: false
+  configuration:
+    description: 'Configuration'
+    required: false
+  destination:
+    description: 'Destination'
+    required: false
+    default: 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.5'
+  sdk:
+    description: 'SDK'
+    required: false
+  arch:
+    description: 'Architecture'
+    required: false
+
+  code-sign-identity:
+    description: 'Code sign identity'
+    required: false
+  development-team:
+    description: 'Development team ID'
+    required: false
+
+  result-bundle-path:
+    description: "Path of the .xcresult bundle"
+    required: false
+  result-bundle-name:
+    description: "Name of uploaded .xcresult artifact"
+    required: false
+    default: "TestResults"
+
+outputs:
+  result-bundle-path:
+    description: "Path of the .xcresult bundle"
+    default: './'
+
+runs:
+  using: 'node12'
+  main: 'index.js'
