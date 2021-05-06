@@ -56,10 +56,6 @@ const parseShowDestinationsOutput = (output) => {
     return destinations;
 };
 
-
-const _parseDestination = parseDestination;
-export { _parseDestination as parseDestination };
-const _encodeDestinationOption = encodeDestinationOption;
-export { _encodeDestinationOption as encodeDestinationOption };
-const _parseShowDestinationsOutput = parseShowDestinationsOutput;
-export { _parseShowDestinationsOutput as parseShowDestinationsOutput };
+exports.parseDestination = parseDestination;
+exports.encodeDestinationOption = encodeDestinationOption;
+exports.parseShowDestinationsOutput = parseShowDestinationsOutput;
