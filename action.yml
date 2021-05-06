@@ -21,7 +21,7 @@ inputs:
   destination:
     description: 'Destination'
     required: false
-    default: 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.5'
+    default: 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
   sdk:
     description: 'SDK'
     required: false
