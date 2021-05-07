@@ -40,10 +40,11 @@ inputs:
   result-bundle-path:
     description: "Path of the .xcresult bundle"
     required: false
+    default: 'TestResults/'
   result-bundle-name:
     description: "Name of uploaded .xcresult artifact"
     required: false
-    default: "TestResults"
+    default: "Results"
 
 outputs:
   result-bundle-path:

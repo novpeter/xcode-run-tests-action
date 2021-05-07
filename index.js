@@ -164,7 +164,7 @@ const main = async () => {
         await testProject(configuration);
 
         // Upload the results bundle as an artifact
-        if (configuration.resultBundlePath !== "" && existsSync(configuration.resultBundlePath)) {
+        if (configuration.resultBundlePath !== "" && fs.existsSync(configuration.resultBundlePath)) {
             const resultBundleArchivePath = await archiveResultBundle(configuration.resultBundlePath);
             await uploadResultBundleArtifact(resultBundleArchivePath, configuration.resultBundleName);
         }
