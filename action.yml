@@ -18,6 +18,7 @@ inputs:
   configuration:
     description: 'Configuration'
     required: false
+    default: 'Debug'
   destination:
     description: 'Destination'
     required: false
@@ -39,7 +40,6 @@ inputs:
   result-bundle-path:
     description: "Path of the .xcresult bundle"
     required: false
-    default: '~/TestResults'
   result-bundle-name:
     description: "Name of uploaded .xcresult artifact"
     required: false
