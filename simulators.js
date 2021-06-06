@@ -41,6 +41,11 @@ const parseDestination = (destination) => {
  * @returns 
  */
 const findDeviceUDID = (devices, os, simulatorName) => {
+
+    core.info(devices)
+    core.info(os)
+    core.info(simulatorName)
+    
     var udid = ''
     for (key in devices) {
         if (key.endsWith('iOS-'+os)) {
@@ -70,6 +75,10 @@ const bootSimulator = async (destination) => {
     let os = destinationJSON['OS']
     let udid = findDeviceUDID(devices, os, destinationJSON['name'])
 
+    if (udid == nil) {
+        core.info('Device UDID was not found!')
+        return
+    }
 
     await execa('xcrun', ['simctl', 'boot', udid])
     await execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
