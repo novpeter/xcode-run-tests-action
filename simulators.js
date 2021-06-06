@@ -43,7 +43,7 @@ const parseDestination = (destination) => {
 const findDeviceUDID = (devices, os, simulatorName) => {
     var udid = ''
     for (key in devices) {
-        core.info(`Key: ${key}`)
+        core.info(`Key: ${key}, sufix ${os} and result = ${key.endsWith('iOS-'+os)}`)
         if (key.endsWith('iOS-'+os)) {
             let simulatorsWithOS = devices[key]
             simulatorsWithOS.forEach(function(simulator, i, arr) {
