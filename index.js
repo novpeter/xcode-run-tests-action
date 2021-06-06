@@ -107,7 +107,7 @@ function sleep(ms) {
 const main = async () => {
     try {
         const configuration = await parseConfiguration();
-        const destination = configuration.destination;
+        const destination = encodeDestinationOption(configuration.destination);
 
         console.log(destination);
 
