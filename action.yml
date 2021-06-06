@@ -46,9 +46,20 @@ inputs:
     required: false
     default: "Results"
 
+  screen-record-bundle-path:
+    description: "Path of screen recording"
+    required: false
+    default: 'TestResults/'
+  screen-record-bundle-name:
+    description: "Name of uploaded screen recording artifact"
+    required: false
+    default: "ScreenRecording.mp4"
+
 outputs:
   result-bundle-path:
     description: "Path of the .xcresult bundle"
+  screen-record-bundle-path:
+    description: "Path of screen recording"
 
 runs:
   using: 'node12'
