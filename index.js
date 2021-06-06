@@ -109,6 +109,8 @@ const main = async () => {
         const configuration = await parseConfiguration();
         const destination = configuration.destination;
 
+        console.log(destination);
+
         await bootSimulator(destination);
         await sleep(12000)
         await testProject(configuration);

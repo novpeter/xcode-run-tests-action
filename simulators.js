@@ -19,7 +19,7 @@ const core = require('@actions/core');
  * @returns JSON object
  */
 const parseDestination = (destination) => {
-    let splitted = destination.split(',')
+    let splitted = String(destination).split(',')
     let destinationJSON = {}
     
     splitted.forEach(element => {
