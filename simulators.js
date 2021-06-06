@@ -42,9 +42,9 @@ const parseDestination = (destination) => {
  */
 const findDeviceUDID = (devices, os, simulatorName) => {
 
-    core.info(devices)
-    core.info(os)
-    core.info(simulatorName)
+    console.log(devices)
+    console.log(os)
+    console.log(simulatorName)
 
     var udid = ''
     for (key in devices) {
@@ -68,6 +68,10 @@ const findDeviceUDID = (devices, os, simulatorName) => {
  */
 const bootSimulator = async (destination) => {
     const xcrunDevices = execa('xcrun', ['simctl','list', '-j', '-v', 'devices']);
+
+    xcrunDevices.stdout.pipe(process.stdout);
+    xcrunDevices.stderr.pipe(process.stderr);
+
     const { stdout } = await xcrunDevices
     
     let destinationJSON = parseDestination(destination)
