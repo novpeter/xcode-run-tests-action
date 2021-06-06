@@ -45,7 +45,7 @@ const findDeviceUDID = (devices, os, simulatorName) => {
     core.info(devices)
     core.info(os)
     core.info(simulatorName)
-    
+
     var udid = ''
     for (key in devices) {
         if (key.endsWith('iOS-'+os)) {
@@ -75,7 +75,7 @@ const bootSimulator = async (destination) => {
     let os = destinationJSON['OS']
     let udid = findDeviceUDID(devices, os, destinationJSON['name'])
 
-    if (udid == nil) {
+    if (udid == '') {
         core.info('Device UDID was not found!')
         return
     }
