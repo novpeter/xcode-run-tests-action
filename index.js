@@ -108,9 +108,10 @@ const parseConfiguration = async () => {
  */
 const startRecording = async (recordPath) => {
     const script = `xcrun simctl io booted recordVideo ${recordPath}`
+    const option = 'tell application "Terminal" to do script "'+ script + '"'
     const record = execa('osascript', ['-e', 'tell application "Terminal" to do script "${}"'])
-    core.info(`Start recording with command ${script}`)
-    await record();
+    core.info(`Start recording with command: ${script}`)
+    await record;
 }
 
 /**
@@ -119,7 +120,7 @@ const startRecording = async (recordPath) => {
 const endRecording =  async () => {
     const killRecord = execa('kill', [`ps -A | grep "CoreSimulator.framework/Versions/A/Resources/bin/simctl" | awk '{print $1}'`])
     core.info(`End screen recording`)
-    await killRecord();
+    await killRecord;
 }
 
 const main = async () => {
