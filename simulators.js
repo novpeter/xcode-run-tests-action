@@ -26,7 +26,6 @@ const parseDestination = (destination) => {
         let pair = element.split('=')
         let key = String(pair[0])
         let value = String(pair[1]).replace('.', '-');
-        core.info(`[${key} : ${value}]`)
         destinationJSON[key] = value
     });
 
@@ -79,8 +78,18 @@ const bootSimulator = async (destination) => {
         return
     }
 
-    await execa('xcrun', ['simctl', 'boot', udid])
-    await execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
+    const boot = execa('xcrun', ['simctl', 'boot', udid])
+    boot.stdout.pipe(process.stdout);
+    boot.stderr.pipe(process.stderr);
+
+    await boot;
+
+    const opent = execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
+
+    opent.stdout.pipe(process.stdout);
+    opent.stderr.pipe(process.stderr);
+
+    await opent;
 };
 
 exports.bootSimulator = bootSimulator;
