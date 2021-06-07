@@ -25,7 +25,7 @@ const parseDestination = (destination) => {
     splitted.forEach(element => {
         let pair = element.split('=')
         let key = String(pair[0])
-        let value = String(pair[1]).replace(/./g, '-');
+        let value = String(pair[1]).replace('.', '-');
         core.info(`[${key} : ${value}]`)
         destinationJSON[key] = value
     });
