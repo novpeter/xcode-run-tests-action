@@ -82,7 +82,7 @@ const bootSimulator = async (destination) => {
     deviceBoot.stdout.pipe(process.stdout);
     deviceBoot.stderr.pipe(process.stderr);
 
-    await boot;
+    await deviceBoot;
 
     core.info(`Did boot simulator with udid ${udid}`)
 
