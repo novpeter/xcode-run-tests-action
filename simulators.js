@@ -26,6 +26,7 @@ const parseDestination = (destination) => {
         let pair = element.split('=')
         let key = String(pair[0])
         let value = String(pair[1]).replace(/./g, '-');
+        core.info(`[${key} : ${value}]`)
         destinationJSON[key] = value
     });
 
@@ -68,9 +69,6 @@ const bootSimulator = async (destination) => {
     const { stdout } = await xcrunDevices
     
     let destinationJSON = parseDestination(destination)
-
-    console.log(destination)
-    core.info(destinationJSON)
 
     let devices = JSON.parse(stdout)['devices']
     let os = destinationJSON['OS']
