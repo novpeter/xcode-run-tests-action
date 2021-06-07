@@ -4,6 +4,9 @@ const execa = require('execa');
 const { parseDestination, encodeDestinationOption } = require('./destinations');
 const { bootSimulator } = require('./simulators');
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const getProjectInfo = async ({workspace, project}) => {
     const options = [];
@@ -100,20 +103,39 @@ const parseConfiguration = async () => {
     return configuration;
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+/**
+ * Start screen recording in new terminal
+ */
+const startRecording = async (recordPath) => {
+    const script = `xcrun simctl io booted recordVideo ${recordPath}`
+    const record = execa('osascript', ['-e', 'tell application "Terminal" to do script "${}"'])
+    core.info(`Start recording with command ${script}`)
+    await record();
+}
+
+/**
+ * Kill the recording process in second terminal
+ */
+const endRecording =  async () => {
+    const killRecord = execa('kill', [`ps -A | grep "CoreSimulator.framework/Versions/A/Resources/bin/simctl" | awk '{print $1}'`])
+    core.info(`End screen recording`)
+    await killRecord();
 }
 
 const main = async () => {
     try {
         const configuration = await parseConfiguration();
         const destination = encodeDestinationOption(configuration.destination);
+        const recordPath = configuration.screenRecordBundlePath
 
         console.log(destination);
 
         await bootSimulator(destination);
         await sleep(12000)
+        await startRecording(recordPath);
         await testProject(configuration);
+        await endRecording();
+
     } catch (err) {
         core.setFailed(`Testing failed with an unexpected error: ${err.message}`);
     }

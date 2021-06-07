@@ -46,7 +46,6 @@ const findDeviceUDID = (devices, os, simulatorName) => {
         if (key.endsWith('iOS-'+os)) {
             let simulatorsWithOS = devices[key]
             simulatorsWithOS.forEach(function(simulator, i, arr) {
-                core.info(`Compare ${simulator['name']} and ${simulatorName}`)
                 if (simulator['name'] == simulatorName) {
                     udid = simulator['udid'] 
                     core.info(`Did found simlator with UDID ${udid}`)
