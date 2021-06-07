@@ -78,18 +78,22 @@ const bootSimulator = async (destination) => {
         return
     }
 
-    const boot = execa('xcrun', ['simctl', 'boot', udid])
-    boot.stdout.pipe(process.stdout);
-    boot.stderr.pipe(process.stderr);
+    const deviceBoot = execa('xcrun', ['simctl', 'boot', udid])
+    deviceBoot.stdout.pipe(process.stdout);
+    deviceBoot.stderr.pipe(process.stderr);
 
     await boot;
 
-    const opent = execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
+    core.info(`Did boot simulator with udid ${udid}`)
 
-    opent.stdout.pipe(process.stdout);
-    opent.stderr.pipe(process.stderr);
+    const openSimulator = execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
 
-    await opent;
+    openSimulator.stdout.pipe(process.stdout);
+    openSimulator.stderr.pipe(process.stderr);
+
+    await openSimulator;
+
+    core.info(`Simulator app was launched`)
 };
 
 exports.bootSimulator = bootSimulator;
