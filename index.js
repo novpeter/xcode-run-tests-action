@@ -108,9 +108,9 @@ const parseConfiguration = async () => {
  */
 const startRecording = async (recordPath) => {
     const script = `xcrun simctl io booted recordVideo ${recordPath}`
-    const option = '\'tell application "Terminal" to do script "'+ script + `"'`
-    core.info(`Start recording with command: ${script}`)
-    const record = execa('osascript', ['-e', option])
+    const command = '\'tell application "Terminal" to do script "'+ script + `"'`
+    core.info(`Start recording with command: ${command}`)
+    const record = execa('osascript', ['-e', command])
     await record;
 }
 
