@@ -48,7 +48,6 @@ const findDeviceUDID = (devices, os, simulatorName) => {
             simulatorsWithOS.forEach(function(simulator, i, arr) {
                 if (simulator['name'] == simulatorName) {
                     udid = simulator['udid'] 
-                    core.info(`Did found simlator with UDID ${udid}`)
                 } 
             })   
         }
@@ -83,7 +82,7 @@ const bootSimulator = async (destination) => {
 
     await deviceBoot;
 
-    core.info(`Did boot simulator with udid ${udid}`)
+    core.info(`Booting simulator with UDID ${udid}`)
 
     const openSimulator = execa('open', ['/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/'])
 
