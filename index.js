@@ -111,7 +111,7 @@ const startRecording = async (recordPath) => {
     const script = 'uptime'
     const command = '\'tell application "Terminal" to do script "'+ script + `"'`
     core.info(`Start recording with command: ${command}`)
-    const record = execa('osascript', ['-e', 'command'])
+    const record = execa('osascript', ['-e', command])
     await record;
 }
 
