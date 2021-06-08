@@ -107,10 +107,11 @@ const parseConfiguration = async () => {
  * Start screen recording in new terminal
  */
 const startRecording = async (recordPath) => {
-    const script = `xcrun simctl io booted recordVideo ${recordPath}`
+    // const script = `xcrun simctl io booted recordVideo ${recordPath}`
+    const script = 'uptime'
     const command = '\'tell application "Terminal" to do script "'+ script + `"'`
     core.info(`Start recording with command: ${command}`)
-    const record = execa('osascript', ['-e', command])
+    const record = execa('osascript', ['-e', 'command'])
     await record;
 }
 
@@ -135,7 +136,7 @@ const main = async () => {
         await sleep(12000)
         await startRecording(recordPath);
         await testProject(configuration);
-        await endRecording();
+        // await endRecording();
 
     } catch (err) {
         core.setFailed(`Testing failed with an unexpected error: ${err.message}`);
